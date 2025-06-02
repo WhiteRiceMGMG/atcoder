@@ -18,7 +18,17 @@ K+1 個のピースのうち、最も短いものの長さ（cm 単位）
 
 */
 
+#include <stdio.h>
 
+#define MAX 1000000000
+
+int main(void) {
+    int n = 0;
+    int l = 0;
+    int k = 0;
+    int array[MAX] = {0};
+    scanf("%d %d %d", &n,&l,&k)
+}
 
 
 
