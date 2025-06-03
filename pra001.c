@@ -65,8 +65,11 @@ int judge(int score) {
   for(i = 1; i < N;i++) {
     tempLength = tempLength + (array[i] - array[i-1]);
     if(tempLength > score) {
-      
+      count++;
+      total = total + tempLength;
+      tempLength = 0;
     }
+    
   }
 
 
