@@ -69,10 +69,8 @@ int judge(int score) {
       total = total + tempLength;
       tempLength = 0;
     }
-
   }
-
-
+  /*ここの返り値を考える*/
 }
 
 
