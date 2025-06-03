@@ -58,6 +58,9 @@ int main(void) {
 }
 
 int judge(int score) {
+  int count = 0;
+  int total = 0;
+  int tempLengh = 0;
 
 }
 
