@@ -1,4 +1,19 @@
 /*
+キーワード　二分探索　最適化判定問題　貪欲法
+類似問題
+ABC 165 D – Floor Function
+ARC 090 C – Candies
+Typical 90 – Problem 001 (Yokan Party)
+ABC 070 D – Transit Tree Path
+AOJ DSL_1_B – Union Find Tree
+Binary Search – Allocate Minimum Number of Pages
+Leetcode 410 – Split Array Largest Sum
+*/
+
+
+
+
+/*
 長さ L の棒があり、途中の切れる位置が A[1] ~ A[N] に与えられる。
 棒を K 回切って → K+1個 に分ける。
 各ピースの長さは M以上にしたい
