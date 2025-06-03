@@ -43,7 +43,7 @@ int main(void) {
   judge()ではスコアが見つかるたびに左が確定していく
   最後に条件をギリギリ満たす最大長がleftに残る*/
   int left = 0; /*絶対に条件を満たす最小値*/
-  int right = L + 1　/*絶対に条件を満たさないギリギリ*/
+  int right = L + 1;　/*絶対に条件を満たさないギリギリ*/
   while(right - left > 0) {
     int mid = (left + right) / 2;
     if(judge(mid) != 0) {
@@ -69,7 +69,7 @@ int judge(int score) {
       total = total + tempLength;
       tempLength = 0;
     }
-    
+
   }
 
 
