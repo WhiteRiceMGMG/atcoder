@@ -36,7 +36,7 @@ int main() {
     int ng = L + 1;
     while ((ng - ok) > 1) {
         int mid = (ok + ng) / 2;
-        if (solve(mid)) {
+        if (solve(mid)!=0) {
             ok = mid;
         } else {
             ng = mid;
