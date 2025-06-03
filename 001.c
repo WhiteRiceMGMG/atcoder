@@ -1,36 +1,48 @@
-// キーワード：二分探索　最適化問題　判定問題　貪欲方 greedy
-
-/*
-左右の長さが L [cm] のようかんがあります。 
-N 個の切れ目が付けられており、左から 
-i 番目の切れ目は左から A_i[cm] の位置にあります。
-あなたは N 個の切れ目のうち K 個を選び、ようかんを 
-K+1 個のピースに分割したいです。そこで、以下の値を スコア とします。
-K+1 個のピースのうち、最も短いものの長さ（cm 単位）
-スコアが最大となるように分割する場合に得られるスコアを求めてください。
-*/
-
-/*切れ目の長さを数列にする．例) →　{0,1,2,5,12,15,19,23} この時左端と右端を追加しておく．
-切れ目の長さをあるスコアXとして，あるスコアXの時切れ目がk+1になるか確かめる．
-最小長さの最大値を求める最適化問題からあるスコアXがとりえるかの最適化問題にする．
-で，このスコアは二分探索で求めていく．左端と右端の真ん中から始める．
-スコアX，つまり長さX以上になるかどうか貪欲に確かめる．
-
-*/
-
 #include <stdio.h>
 
-#define MAX 1000000000
+#define MAX_N 100010
 
-int main(void) {
-    int n = 0;
-    int l = 0;
-    int k = 0;
-    int array[MAX] = {0};
-    scanf("%d %d %d", &n,&l,&k)
+int N, L, K;
+int A[MAX_N];
+
+int solve(int M) {
+    int cut_count = 0;
+    int prev = 0;
+    int total_cut_length = 0;
+
+    for (int i = 1; i <= N; i++) {
+        prev += A[i] - A[i - 1];
+        if (prev >= M) {
+            cut_count++;
+            total_cut_length += prev;
+            prev = 0;
+        }
+    }
+
+    if (cut_count > K) return 1;
+    if (cut_count == K && (L - total_cut_length) >= M) return 1;
+    return 0;
 }
 
+int main() {
+    // 入力
+    scanf("%d %d %d", &N, &L, &K);
+    A[0] = 0;
+    for (int i = 1; i <= N; i++) {
+        scanf("%d", &A[i]);
+    }
 
+    int ok = 0;
+    int ng = L + 1;
+    while ((ng - ok) > 1) {
+        int mid = (ok + ng) / 2;
+        if (solve(mid)) {
+            ok = mid;
+        } else {
+            ng = mid;
+        }
+    }
 
-
-
+    printf("%d\n", ok);
+    return 0;
+}
