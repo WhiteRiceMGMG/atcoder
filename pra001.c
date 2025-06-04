@@ -71,6 +71,13 @@ int judge(int score) {
     }
   }
   /*ここの返り値を考える*/
+  if(count > K) {
+    return 1;
+  }else if(count == K &&(total - L) > srore) {
+    return 1;
+  }else {
+    return 0;
+  }
 }
 
 
