@@ -91,3 +91,76 @@ int final_check(int *flagArray, int *duplArray) {
 }
 
 
+/*
+#include <stdio.h>
+
+#define MAX_VAL 1000001
+
+int N;
+int baseArray[100010];
+int flagArray[100010];   // 重複マーク
+int duplArray[100010];   // 倍数マーク
+int countArray[MAX_VAL]; // 値ごとの出現回数
+
+void flag_check();
+void dupl_check();
+int  final_check();
+
+int main(void) {
+    scanf("%d", &N);
+    for(int i = 0; i < N; i++) {
+        scanf("%d", &baseArray[i]);
+        countArray[baseArray[i]]++;
+    }
+
+    flag_check();  // 重複のある値にマーク
+    dupl_check();  // baseArray[i] が他の値の倍数ならマーク
+    int count = final_check();
+
+    printf("%d\n", count);
+    return 0;
+}
+
+// 値の重複チェック（O(1)で出現回数見られる）
+void flag_check() {
+    for(int i = 0; i < N; i++) {
+        if(countArray[baseArray[i]] > 1) {
+            flagArray[i] = 1; // 重複がある値
+        }
+    }
+}
+
+// 値の倍数関係チェック（エラトステネス風）
+void dupl_check() {
+    static char exists[MAX_VAL] = {0};
+
+    // 存在フラグを立てる（入力で使われた値のみ）
+    for(int i = 0; i < N; i++) {
+        exists[baseArray[i]] = 1;
+    }
+
+    // 各 baseArray[i] について、倍数が存在すればマーク
+    for(int i = 0; i < N; i++) {
+        int val = baseArray[i];
+        for(int j = val * 2; j < MAX_VAL; j += val) {
+            if(exists[j]) {
+                duplArray[i] = 1;  // 倍数が配列に存在
+                break;
+            }
+        }
+    }
+}
+
+// 両方の条件を満たす要素数をカウント
+int final_check() {
+    int count = 0;
+    for(int i = 0; i < N; i++) {
+        if(flagArray[i] == 0 && duplArray[i] == 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+
+*/
