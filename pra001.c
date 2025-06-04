@@ -23,61 +23,50 @@ Leetcode 410 – Split Array Largest Sum
 
 #define MAX_N 100010
 
-int N,K,L;
+int N, K, L;
 int array[MAX_N];
 
-/*最大値Mが成立する時1を返す*/
-int judge(int score);
+// score以上の長さのピースをK+1個作れるか判定
+int judge(int score) {
+  int i;
+  int count = 0;
+  int prev = 0;
+
+  for (i = 0; i < N; i++) {
+    int len = array[i] - prev;
+    if (len >= score) {
+      count++;
+      prev = array[i];
+    }
+  }
+
+  // 最後のピース（L - prev）もscore以上ならカウント
+  if (L - prev >= score) {
+    count++;
+  }
+
+  return count >= K + 1; // K回切ってK+1ピースできるか？
+}
 
 int main(void) {
-  int i = 0;
+  int i;
   scanf("%d %d %d", &N, &K, &L);
-  for(i = 0; i < N; i++) {
+  for (i = 0; i < N; i++) {
     scanf("%d", &array[i]);
   }
-  
-  /*二分探索，最大となるスコアを探す．
-  right - left == 1になったら探索は終わり．
-  この時のleftが最大のスコア，
-  rightが条件を満たさない最小のM
-  judge()ではスコアが見つかるたびに左が確定していく
-  最後に条件をギリギリ満たす最大長がleftに残る*/
-  int left = 0; /*絶対に条件を満たす最小値*/
-  int right = L + 1;/*絶対に条件を満たさないギリギリ*/
-  while(right - left > 0) {
+
+  int left = 0;
+  int right = L + 1;
+
+  while (right - left > 1) {
     int mid = (left + right) / 2;
-    if(judge(mid) != 0) {
-      mid = left;
+    if (judge(mid)) {
+      left = mid;
     } else {
-      mid = right;
+      right = mid;
     }
   }
 
-  printf("%d", left);
+  printf("%d\n", left);
   return 0;
 }
-
-int judge(int score) {
-  int i = 0;
-  int count = 0;
-  int total = 0;
-  int tempLength = 0;
-  for(i = 1; i < N;i++) {
-    tempLength = tempLength + (array[i] - array[i-1]);
-    if(tempLength > score) {
-      count++;
-      total = total + tempLength;
-      tempLength = 0;
-    }
-  }
-  /*ここの返り値を考える*/
-  if(count > K) {
-    return 1;
-  }else if(count == K &&(total - L) > score) {
-    return 1;
-  }else {
-    return 0;
-  }
-}
-
-
