@@ -34,111 +34,56 @@
 ***********************************************/
 #include <stdio.h>
 
-void define_bracket(int n, int *array);
-void judge_bracket(int n, int *array);
+void define_bracket(int n);
 void print_bracket(int n, int *array);
 
 int main(void) {
     int i = 0;
     int n = 0;
     scanf("%d", &n);
-    int bitArray[24] = {0};
-    define_bracket(n, bitArray);
+    if (n % 2 != 0) {
+        return 0;
+    }
+    define_bracket(n);
 
 }
+void define_bracket(int n) {
+    int bit;
+    int array[24]; // 最大24ビットまで対応（制約を見て調整可）
 
-void define_bracket(int n, int *bitArray) {
-    int i = 0;
-    int j = 0;
-    int bit = 0;
     for (bit = 0; bit < (1 << n); bit++) {
+        int sum = 0;
+        int is_valid = 1;
+
         for (int i = 0; i < n; i++) {
-            if ((bit >> i) & 1) {
-                bitArray[i] = 1;
+            if ((bit >> (n - 1 - i)) & 1) {
+                array[i] = 1;  // '('
             } else {
-                bitArray[i] = -1;
+                array[i] = -1; // ')'
+            }
+            sum += array[i];
+            if (sum < 0) {
+                is_valid = 0;
+                break;
             }
         }
-        // ここで array[] に 1/-1 の並びが入ってる！
+
+        if (sum != 0) is_valid = 0;
+
+        if (is_valid) {
+            print_bracket(n, array);
+        }
     }
 }
-
-void judge_bracket(int n, int *bitArray) {
-    int i = 0;
-    int flag = 0;
-    int totalVal = 0;
-    for(i = 0; i < n; i++) {
-        if(i == 0) {
-            totalVal += *(bitArray + i);
-            continue;
+void print_bracket(int n, int *array) {
+    for (int i = 0; i < n; i++) {
+        if (array[i] == 1) {
+            printf("(");
         } else {
-            ;
-        }
-        if(totalVal < 0) {
-            flag = 0;
-            break;
+            printf(")");
         }
     }
-    if(flag == 0) {
-        printf("");
-    }    
-
+    printf("\n");
 }
-
-
-
-
-
-
-
-
-
-
-
-/*
-#include <stdio.h>
-
-int main(void) {
-    int i = 0;
-    int n = 0;
-    int total;
-    int flag = 0;//0の時ダメ
-    char symbol[20] = "";
-    int bitArray[20] = {0};
-    scanf("%d", &n);
-    for (i = 0; i < n; i++) {
-        if(*(symbol)+i == '(') {
-            *(bitArray+i) = 1;
-        } else if(*(symbol + i) == ')') {
-            *(bitArray + i) = -1;
-        } else {
-            ;
-        }
-    }
-    
-    for(i = 0; i < n; i++) {
-        if(i == 0) {
-            total += *(bitArray + i);
-            continue;
-        } else {
-            ;
-        }
-        if(total < 0) {
-            flag = 0;
-            break;
-        }
-    }
-    if(flag == 0) {
-        printf("")
-    }
-
-}
-いや，ダメダメ．入力されるのは数値だけ
-*/
-
-
-
-
-
 
 
