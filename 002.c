@@ -49,7 +49,7 @@ int main(void) {
 }
 void define_bracket(int n) {
     int bit;
-    int array[24]; // 最大24ビットまで対応（制約を見て調整可）
+    int array[24]; 
 
     for (bit = 0; bit < (1 << n); bit++) {
         int sum = 0;
@@ -57,9 +57,9 @@ void define_bracket(int n) {
 
         for (int i = 0; i < n; i++) {
             if ((bit >> (n - 1 - i)) & 1) {
-                array[i] = 1;  // '('
+                array[i] = 1; 
             } else {
-                array[i] = -1; // ')'
+                array[i] = -1; 
             }
             sum += array[i];
             if (sum < 0) {
