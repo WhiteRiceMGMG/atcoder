@@ -35,8 +35,7 @@ int main(void) {
     int baseArray[100010] = {0};
     int flagArray[100010] = {0};
     int duplArray[100010] = {0};
-    int countARray[MAX_VAL] = {0};
-    int countArray[]
+    int countArray[MAX_VAL] = {0};
     int i = 0;
     int count = 0;
     scanf("%d", &N);
